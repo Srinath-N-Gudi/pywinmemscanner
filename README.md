@@ -55,7 +55,7 @@ This library is Windows-specific and requires access to the target process’s m
 ## Why PyWinMemScanner?
 
 - **Efficient Memory Scanning**: The library allows you to quickly locate values in large memory regions without needing to write complicated, low-level code.
-- **Built-in Support for Various Data Types**: It includes handling for common data types like integers, floats, and strings, making memory interaction seamless.
+- **Built-in Support for Various Data Types**: It includes handling for common data types like integers, floats and double making memory interaction seamless.
 - **Real-time Memory Monitoring**: For applications like game mods or cheat engines, real-time memory monitoring can be essential, and this library handles it with ease.
 - **Extendable and Open-Source**: The codebase is written in Python with an underlying C/C++ DLL, and users can easily extend its functionality for their specific needs.
 
