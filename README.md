@@ -41,12 +41,9 @@ print(mss) # prints the updated memory addresses list
 
 #Once the len(mss.address_list) is low enough (e.g. under 10) write_address_list(your_target_data) to write into the memory of entire address_list at once.
 mss.write_address_list(target_data)
-
+mss.close() # Closing is important to free the dynamically allocated memory.
 # This should update the value in the process. 
 
-# Modify memory at the found address
-for address in addresses:
-    scanner.write_int(address, 200)
 ```
 ## Compatibility
 
