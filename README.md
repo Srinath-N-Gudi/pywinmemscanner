@@ -14,7 +14,7 @@ With **PyWinMemScanner**, you can easily access and scan a target process’s me
 
 ## Installation
 
-You can easily install **PyWinMemScanner** using PyPI with the following command:
+You can easily install **PyWinMemScanner** using pip with the following command:
 
 ```bash
 pip install pywinmemscanner
