@@ -53,19 +53,19 @@ class MemoryNextScan:
             if isinstance(data, int):
                 scanNextINT(self.__hProcess, self.__address_array, data)
             else:
-                self.close()
+                
                 raise ValueError("Expected an integer!")
         elif self.__datatype == "FLOAT":
             if isinstance(data, float):
                 scanNextFLOAT(self.__hProcess, self.__address_array, data)
             else:
-                self.close()
+                
                 raise ValueError("Expected a float!")
         elif self.__datatype == "DOUBLE":
             if isinstance(data, (float)):
                 scanNextDOUBLE(self.__hProcess, self.__address_array, data)
             else:
-                self.close()
+                
                 raise ValueError("Expected a floating point value!")
         self.__update_result()
 
@@ -114,21 +114,21 @@ class MemoryNextScan:
             for i in range(_found_address.size):
                 writing_address = _found_address.array[i]
                 if not WPM_INT(self.__hProcess, writing_address, int(data)):
-                    self.close()
+                    
                     raise WritingProcessMemoryFailureError('Failed to write memory to the process!')
 
         elif self.__datatype == "DOUBLE":
             for i in range(_found_address.size):
                 writing_address = _found_address.array[i]
                 if not WPM_DOUBLE(self.__hProcess, writing_address, ctypes.c_double(data)):
-                    self.close()
+                    
                     raise WritingProcessMemoryFailureError('Failed to write memory to the process!')
         elif self.__datatype == "FLOAT":
             for i in range(_found_address.size):
                 writing_address = _found_address.array[i]
 
                 if not WPM_FLOAT(self.__hProcess, writing_address, float(data)):
-                    self.close()
+                    
                     raise WritingProcessMemoryFailureError('Failed to write memory to the process!')
 
         
@@ -158,19 +158,19 @@ class MemoryNextScan:
             if WPM_INT(self.__hProcess, writing_address, data):
                 return True
             else:
-                self.close()
+                
                 raise WritingProcessMemoryFailureError('Failed to write memory to the process!')
         elif self.__datatype == "FLOAT":
             if WPM_FLOAT(self.__hProcess, writing_address, data):
                 return True
             else:
-                self.close()
+                
                 raise WritingProcessMemoryFailureError('Failed to write memory to the process!')
         elif self.__datatype == "DOUBLE":
             if WPM_DOUBLE(self.__hProcess, writing_address, ctypes.c_double(data)):
                 return True
             else:
-                self.close()
+                
                 raise WritingProcessMemoryFailureError('Failed to write memory to the process!')
 
     def read_memory(self, address_index: int) -> Union[int, float]:
@@ -199,21 +199,21 @@ class MemoryNextScan:
             if RPM_INT(self.__hProcess, reading_address, ctypes.byref(data)):
                 return data.value
             else:
-                self.close()
+                
                 raise ReadingProcessMemoryFailureError('Failed to read memory from the process!')
         elif self.__datatype == "FLOAT":
             data = ctypes.c_float(0)
             if RPM_FLOAT(self.__hProcess, reading_address, ctypes.byref(data)):
                 return data.value
             else:
-                self.close()
+                
                 raise ReadingProcessMemoryFailureError('Failed to read memory from the process!')
         elif self.__datatype == "DOUBLE":
             data = ctypes.c_double(0)
             if RPM_DOUBLE(self.__hProcess, reading_address, ctypes.byref(data)):
                 return data.value
             else:
-                self.close()
+                
                 raise ReadingProcessMemoryFailureError('Failed to read memory from the process!')
 
         
@@ -262,21 +262,21 @@ class MemoryNextScan:
                     if RPM_INT(self.__hProcess, reading_address, ctypes.byref(data)):
                         res.append(data.value)
                     else:
-                        self.close()
+                        
                         raise ReadingProcessMemoryFailureError('Failed to read memory from the process!')
                 elif self.__datatype == "FLOAT":
                     data = ctypes.c_float(0)
                     if RPM_FLOAT(self.__hProcess, reading_address, ctypes.byref(data)):
                         res.append(data.value)
                     else:
-                        self.close()
+                        
                         raise ReadingProcessMemoryFailureError('Failed to read memory from the process!')
                 elif self.__datatype == "DOUBLE":
                     data = ctypes.c_double(0)
                     if RPM_DOUBLE(self.__hProcess, reading_address, ctypes.byref(data)):
                         res.append(data.value)
                     else:
-                        self.close()
+                        
                         raise ReadingProcessMemoryFailureError('Failed to read memory from the process!')       
 
             ctr = Counter(res)
@@ -396,10 +396,8 @@ class MemoryScanner(object):
         if isinstance(data, int):
             res = scanINT(self.__hProcess, data, self.__address_array)
             if res == -1:
-                freeAddressArray(self.__address_array)
                 raise MemoryAllocationFailureError('Failed to allocate memory for buffer data!')
             elif res == -2:
-                freeAddressArray(self.__address_array)
                 raise ReadingProcessMemoryFailureError('Failed to read memory from the process!')
             elif res == 1:
                 _found_address = self.__address_array.contents
@@ -413,10 +411,8 @@ class MemoryScanner(object):
         elif isdouble:
             res = scanDOUBLE(self.__hProcess, data, self.__address_array)
             if res == -1:
-                freeAddressArray(self.__address_array)
                 raise MemoryAllocationFailureError('Failed to allocate memory for buffer data!')
             elif res == -2:
-                freeAddressArray(self.__address_array)
                 raise ReadingProcessMemoryFailureError('Failed to read memory from the process!')
             elif res == 1:
                 _found_address = self.__address_array.contents
@@ -430,10 +426,8 @@ class MemoryScanner(object):
         elif isinstance(data, float):
             res = scanFLOAT(self.__hProcess, data, self.__address_array)
             if res == -1:
-                freeAddressArray(self.__address_array)
                 raise MemoryAllocationFailureError('Failed to allocate memory for buffer data!')
             elif res == -2:
-                freeAddressArray(self.__address_array)
                 raise ReadingProcessMemoryFailureError('Failed to read memory from the process!')
             elif res == 1:
                 _found_address = self.__address_array.contents
