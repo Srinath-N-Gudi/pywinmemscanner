@@ -24,7 +24,7 @@ from pywinmemscanner import MemoryScanner
 
 # Initialize the scanner with the target process
 pid = MemoryScanner.get_process_id_by_name(input('Enter process name :')) # Returns int
-ms = memscan.MemoryScanner(pid) # PID can be direcly passed in integer format
+ms = MemoryScanner(pid) # PID can be direcly passed in integer format
 
 # Scan for a value in memory
 mss = ms.new_scan(your_value)
